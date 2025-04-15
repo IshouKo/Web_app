@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+  {% if current_user.is_authenticated %}
+    <form action="{{ url_for('main.post') }}" method="POST">
+      {{ form.hidden_tag() }}
+      {{ form.content.label }}<br>
+      {{ form.content(size=80) }}<br>
+      {{ form.submit() }}
+    </form>
+  {% endif %}
+  <hr>
+  {% for post in posts %}
+    <p><strong>{{ post.author.username }}</strong>: {{ post.content }}<br><small>{{ post.date_posted }}</small></p>
+  {% endfor %}
+{% endblock %}
